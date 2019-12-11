@@ -4,14 +4,19 @@ import time
 pypythonver = 0.1
 pypython = str("PyPython interpreter- Python interpreter built with python")
 print(pypython)
+def e_x_i_t():
+    print("Next time, use sys.exit()!")
+    exit()
 customcommands = {
-    "exit":"exit()",
-    "quit":"quit()",
-    "pypver":"print(pypython)",
+    "exit":"e_x_i_t()",
+    "quit":"e_x_i_t()",
+    "pypfo":"print(pypython)",
+    "pypver":"print(pypythonver)",
     "clear":"os.system('clear')",
     "print(inputtedcommand)":"print('This is an interpreter-required variable. Please do not tamper with it')",
     "print(customcommands)":"print('This is an interpreter-required variable. Please do not tamper with it')",
-    "print(i_t_e_m)":"print('This is an interpreter-required variable. Please do not tamper with it')"
+    "print(i_t_e_m)":"print('This is an interpreter-required variable. Please do not tamper with it')",
+    "ls":"print('You are in the python shell.')"
 }
 def commandie():
     global inputtedcommand
@@ -23,4 +28,13 @@ def commandie():
             return;
     eval(inputtedcommand);
 while True:
-    commandie()
+    try:
+        commandie()
+    except NameError as e:
+        print(f"{inputtedcommand}is not a command, mathematical equation, function, or a valid syntax for the command you just tried to use. ({e})")
+    except EOFError:
+        print("\nUse sys.exit() next time!")
+        sys.exit()
+    except KeyboardInterrupt:
+        print("\nUse sys.exit() next time!")
+        sys.exit()
